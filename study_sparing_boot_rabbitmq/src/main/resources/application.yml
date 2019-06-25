@@ -1,0 +1,29 @@
+server:
+ port: 8093
+ tomcat:
+    uri-encoding: UTF-8
+spring:
+  banner:
+   charset: utf-8
+  http:
+   encoding:
+     charset: UTF-8
+     enabled: true
+     force: true
+  application:
+    name: spring-boot-rabbitmq
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: guest
+    password: guest
+    virtual-host: /
+  messages:
+    encoding: UTF-8
+  datasource:
+    test1:
+       jdbc-url: jdbc:mysql://127.0.0.1:3306/lin?useUnicode=true&characterEncoding=utf-8&serverTimezone=UTC&useSSL=true
+       username: root
+       password: 123
+       driver-class-name: com.mysql.cj.jdbc.Driver
+
