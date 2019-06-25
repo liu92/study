@@ -1,0 +1,44 @@
+server:
+  tomcat:
+    uri-encoding: UTF-8
+  port: 8084
+spring:
+  banner:
+    charset: utf-8
+  http:
+   encoding:
+     charset: UTF-8
+     enabled: true
+     force: true
+  messages:
+    encoding: UTF-8
+  datasource:
+    test1:
+       jdbc-url: jdbc:mysql://127.0.0.1:3306/test1?useUnicode=true&characterEncoding=utf-8&serverTimezone=UTC&useSSL=true
+       username: root
+       password: 123
+       driver-class-name: com.mysql.cj.jdbc.Driver
+    test2:
+       jdbc-url: jdbc:mysql://127.0.0.1:3306/test2?useUnicode=true&characterEncoding=utf-8&serverTimezone=UTC&useSSL=true
+       username: root
+       password: 123
+       driver-class-name: com.mysql.cj.jdbc.Driver
+
+logging:
+  level:
+   com.base.mapper: debug
+mybatis:
+  config-location: classpath:mybatis_config.xml
+  type-aliases-package: com.base.model
+
+
+# 注意 ：在yml 中可以写 数组、对象、Map 等
+# 要注意空格 ，区分大小写
+# 对于map 可以使用 1行内写法： 也就是 maps: {k1：v1,k2: v2} 这种
+# 2、还可以是 maps:
+#            k: v  这里要注意缩进
+# 对于lists的写法可以用下面的写法：用-表示数组中的一个元素 然后空格 属性
+#  1、对于lists :
+#       - lisi
+#       - zhangsan
+# 也可以是行内写法 lists:[lisi,zhangsan]

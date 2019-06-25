@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>org.study</groupId>
+	<artifactId>study</artifactId>
+	<version>1.0-SNAPSHOT</version>
+	<packaging>pom</packaging>
+	<name>study</name>
+
+	<modules>
+		<module>study_spring_boot_demo</module>
+		<module>study_spring_boot_drools</module>
+		<module>study_spring_boot_mybatis_demo</module>
+		<module>study_spring_boot_mybatis_datasource</module>
+		<module>neo4j-spring-boot</module>
+		<module>study_sparing_boot_rabbitmq</module>
+	</modules>
+
+
+
+	<parent>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-parent</artifactId>
+		<version>2.1.4.RELEASE</version>
+		<relativePath/> <!-- lookup parent from repository -->
+	</parent>
+
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<jdk.version>1.8</jdk.version>
+		<spring.version>5.1.6.RELEASE</spring.version>
+		<mysql.version>8.0.11</mysql.version>
+		<thymeleaf.layout.version>2.4.1</thymeleaf.layout.version>
+		<lombok.version>1.18.2</lombok.version>
+		<drools.version>7.20.0.Final</drools.version>
+		<kie.version>7.20.0.Final</kie.version>
+		<neo4j.version>1.7.2</neo4j.version>
+		<commons.lang3.version>3.9</commons.lang3.version>
+		<servlet.version>4.0.1</servlet.version>
+		<javax.persistence.version>2.2</javax.persistence.version>
+		<spring.data.jpa.version>2.1.8.RELEASE</spring.data.jpa.version>
+		<junit.version>4.12</junit.version>
+	</properties>
+
+	<!--dependencies 即使在子项目中不写该依赖项，那么子项目仍然会从父项目中继承该依赖项（全部继承）
+     dependencyManagement 里只是声明依赖，并不实现引入，因此子项目需要显示的声明需要用的依赖。
+     如果不在子项目中声明依赖，是不会从父项目中继承下来的；只有在子项目中写了该依赖项，并且没有指定具体版本，
+     才会从父项目中继承该项，并且 version 和 scope 都读取自父 pom; 另外如果子项目中指定了版本号，那么会使用子项目中指定的jar版本。
+	 重复引用jar包，可以通过下面的方式解决：
+     主pom中把依赖通过<dependecyManagement>引起来，表示子pom可能会用到的jar包依赖，
+     子pom如果需要引用该jar包，则直接引用即可！不需要加入<version>，便于统一管理。此外也可以加入仅在子pom中用到的jar包-->
+	<dependencyManagement>
+		<dependencies>
+			<!--<dependency>-->
+			<!--<groupId>org.springframework.boot</groupId>-->
+			<!--<artifactId>spring-boot-dependencies</artifactId>-->
+			<!--<version>2.1.4.RELEASE</version>-->
+			<!--<type>pom</type>-->
+			<!--<scope>import</scope>-->
+			<!--</dependency>-->
+
+
+			<!--不使用parent方式进行依赖,需要scope和type设置-->
+			<!--<dependency>-->
+			<!--<groupId>org.springframework.boot</groupId>-->
+			<!--<artifactId>spring-boot-dependencies</artifactId>-->
+			<!--<version>2.1.4.RELEASE</version>-->
+			<!--<scope>import</scope>-->
+			<!--<type>pom</type>-->
+			<!--</dependency>-->
+
+
+
+			<!--springBoot 2.0 将布局单独提取出来，需要单独引入依赖, 这个是 布局功能的支持程序-->
+			<dependency>
+				<groupId>nz.net.ultraq.thymeleaf</groupId>
+				<artifactId>thymeleaf-layout-dialect</artifactId>
+				<version>${thymeleaf.layout.version}</version>
+			</dependency>
+
+
+			<dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-web</artifactId>
+				<version>${spring.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-context</artifactId>
+				<version>${spring.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.springframework.data</groupId>
+				<artifactId>spring-data-jpa</artifactId>
+				<version>${spring.data.jpa.version}</version>
+			</dependency>
+
+
+			<dependency>
+				<groupId>javax.servlet</groupId>
+				<artifactId>javax.servlet-api</artifactId>
+				<version>${servlet.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>javax.persistence</groupId>
+				<artifactId>javax.persistence-api</artifactId>
+				<version>${javax.persistence.version}</version>
+			</dependency>
+
+
+			<dependency>
+				<groupId>mysql</groupId>
+				<artifactId>mysql-connector-java</artifactId>
+				<version>${mysql.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>org.projectlombok</groupId>
+				<artifactId>lombok</artifactId>
+				<version>${lombok.version}</version>
+				<scope>provided</scope>
+			</dependency>
+
+			<dependency>
+				<groupId>org.drools</groupId>
+				<artifactId>drools-compiler</artifactId>
+				<version>${drools.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>org.kie</groupId>
+				<artifactId>kie-spring</artifactId>
+				<version>${kie.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>org.neo4j.driver</groupId>
+				<artifactId>neo4j-java-driver</artifactId>
+				<version>${neo4j.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>org.neo4j</groupId>
+				<artifactId>neo4j</artifactId>
+				<version>3.5.3</version>
+				<scope>runtime</scope>
+			</dependency>
+
+			<dependency>
+				<groupId>org.neo4j</groupId>
+				<artifactId>neo4j-ogm-core</artifactId>
+				<version>3.1.8</version>
+				<scope>compile</scope>
+			</dependency>
+			<!--neo4j-ogm-bolt-driver是二进制驱动，
+            本文列出了这种高性能的驱动但是没有使用，
+            spring-data-neo4j支持多种bolt，http（s）俩种协议操作。
+            默认使用http（s）协议驱动 -->
+			<dependency>
+				<groupId>org.neo4j</groupId>
+				<artifactId>neo4j-ogm-http-driver</artifactId>
+				<version>3.1.8</version>
+				<scope>runtime</scope>
+			</dependency>
+			<dependency>
+				<groupId>org.neo4j</groupId>
+				<artifactId>neo4j-ogm-embedded-driver</artifactId>
+				<version>3.1.8</version>
+				<scope>test</scope>
+			</dependency>
+			<dependency>
+				<groupId>org.neo4j</groupId>
+				<artifactId>neo4j-ogm-bolt-driver</artifactId>
+				<version>3.1.8</version>
+			</dependency>
+
+			<dependency>
+				<groupId>org.apache.commons</groupId>
+				<artifactId>commons-collections4</artifactId>
+				<version>4.3</version>
+			</dependency>
+
+			<dependency>
+				<groupId>org.apache.commons</groupId>
+				<artifactId>commons-lang3</artifactId>
+				<version>3.9</version>
+			</dependency>
+			<dependency>
+				<groupId>junit</groupId>
+				<artifactId>junit</artifactId>
+				<version>${junit.version}</version>
+				<scope>test</scope>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
+
+	<build>
+		<pluginManagement>
+			<plugins>
+				<plugin>
+					<!--在添加了该插件之后，当运行“mvn package”进行打包时，
+                    会打包成一个可以直接运行的 JAR 文件，使用“java -jar”命令就可以直接运行。
+                    这在很大程度上简化了应用的部署，只需要安装了 JRE 就可以运行。-->
+					<groupId>org.springframework.boot</groupId>
+					<artifactId>spring-boot-maven-plugin</artifactId>
+				</plugin>
+
+				<plugin>
+					<!-- 指定maven编译的jdk版本,如果不指定,maven3默认用jdk 1.5 maven2默认用jdk1.3 -->
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-compiler-plugin</artifactId>
+					<version>3.8.0</version>
+					<configuration>
+						<!-- 一般而言，target与source是保持一致的，但是，
+                        有时候为了让程序能在其他版本的jdk中运行(对于低版本目标jdk，
+                        源代码中不能使用低版本jdk中不支持的语法)，会存在target不同于source的情况 -->
+						<source>1.8</source> <!-- 源代码使用的JDK版本 -->
+						<target>1.8</target> <!-- 需要生成的目标class文件的编译版本 -->
+						<encoding>UTF-8</encoding> <!-- 字符集编码 -->
+					</configuration>
+				</plugin>
+			</plugins>
+		</pluginManagement>
+	</build>
+
+</project>
