@@ -15,6 +15,7 @@
 		<module>study_spring_boot_mybatis_datasource</module>
 		<module>neo4j-spring-boot</module>
 		<module>study_sparing_boot_rabbitmq</module>
+		<module>study_hashmap_question</module>
 	</modules>
 
 
